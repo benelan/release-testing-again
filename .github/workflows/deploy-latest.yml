@@ -49,9 +49,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.ADMIN_TOKEN }}
         run: |
-          gh repo edit --enable-rebase-merge
-          gh pr merge  ci/sync-dev-to-main --rebase --admin
-          gh repo edit --enable-rebase-merge=false
+          gh repo edit --enable-rebase-merge --repo ${{ github.repository }}
+          gh pr merge  ci/sync-dev-to-main --rebase --admin --repo ${{ github.repository }}
+          gh repo edit --enable-rebase-merge=false --repo ${{ github.repository }}
 
   release-please:
     if: github.event_name != 'workflow_dispatch'
